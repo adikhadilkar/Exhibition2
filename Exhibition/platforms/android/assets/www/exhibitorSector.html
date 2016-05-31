@@ -6,20 +6,57 @@
 		<div class="center">Exhibitors</div>
       <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
     </div>
-  </div>
-  <div class="page-content infinite-scroll" style="margin:0px 0px">
+	
+	
+	<div class="toolbar tabbar">
+		<div class="toolbar-inner">
+			<a href="#alphabet1" class="tab-link active"><b>Alphabet</b></a>
+			<a href="#sector" class="tab-link" onclick="sectors()"><b>Sector</b></a>
+		</div>
+	</div>
 
 	
-	 <div class="tabs" style="margin:0px 0px">
+	
+	
+	
+  </div>
+  <div class="page-content infinite-scroll" >
+	
+	<div class="tabs">
+	
+      <div id="alphabet1" class="page-content tab active">
+		<div class="list-block inputs-list" style="margin:0px 0px">
+			<ul>
+				<li>
+					<div class="item-content">
+					<div class="item-inner" style="margin:0px 0px">
+						<input type="text" name="search" style="padding-top:0px" onkeyup="getData(this.value)" id="search" placeholder="Search.."/>
+					</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div id="alphabet"></div>
+		<p id="nosearch"></p>
+	  </div>
+	  
+	  <div id="sector" class="page-content tab">
+		
+	  </div>
+	  
+	</div>
+	
+	
+	<!-- <div class="tabs">
 	 
-	 <!-- <div class="buttons-row" style="padding:5%">
+	<!--  <div class="buttons-row" style="padding:5%">
       
       <a href="#alphabet" class="tab-link active button button-fill"><b>Alphabet</b></a>
       
       <a href="#sector" class="tab-link button button-fill" onclick="sectors()"><b>Sector</b></a>
-    </div> -->
+    </div>  
 	 
-	 <div class="row">
+	<div class="row">
 		<div class="col-50" style="padding-left:5%">
 			<center><h2><b><a href="#alphabet1" class="tab-link button button-big button-fill color-blue active">Alphabet</a></b></h2></center>
 		</div>
@@ -52,15 +89,15 @@
 		
 		
 		
-    </div>
+    </div> -->
 	
 	<div class="popup-overlay"></div>
 		
-	<div class="popup demo-rateus" style="display: none; margin:0px 0px">
+	<div class="popup demo-rateus" style="display:none;padding-top:10%">
 	<div class="view navbar-fixed">
 	<div class="page-content">
     <div class="content-block">
-	<div class="center" style="text-align:center" id="sectorContent" style="margin:0px 0px"></div>
+	<div class="center" style="text-align:center" id="sectorContent"></div>
     <div style="text-align:center"><a href="#" class="close-popup button button-fill button-raised color-blue" id="pclose"><b>Close</b></a></div>
     </div>
     </div>
