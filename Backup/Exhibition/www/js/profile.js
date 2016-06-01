@@ -175,9 +175,8 @@ function sendProfile()
 		} 
 	sendData(data);
 
-	}
-		
-	}
+	}		
+}
 	
 	
 	
@@ -232,7 +231,7 @@ function sendProfile()
 	} */
 
 	
-}
+
 
 function getBase64Image(img) {
 	alert("get base called");

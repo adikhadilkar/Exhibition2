@@ -17,12 +17,6 @@ $createdOn=date('Y-m-d h:i:s', time());
 
 $addNotesQuery="insert into visitorNotes (notesTitle,notes,createdOn,modifiedOn)  values('$notesTitle','$notes','$createdOn','$createdOn')";
 $addNotes=mysql_query($addNotesQuery,$conn) or die(mysql_error());
-
-	
 $jsonresponse=$notesTitle;			
 deliver_response(200,"note Added","notesAdd",$jsonresponse);
-
-
- 
-	
 ?>

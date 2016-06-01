@@ -490,13 +490,13 @@ function getData(value)
 				var logolink=[];
 				var description=[];
 				
-				
+				//style="color:gray;padding-top:50%"
 				if(response.searchedInformation.length=="")
 				{
 					myApp.hidePreloader();
 					$("#nosearch").fadeIn();
-					$("#nosearch").html("<center><h1>Match Not Found!!</h1></center>");
-					$("#nosearch").css({"color": "red"});
+					$("#nosearch").html("<center><h1>Match Not Found</h1></center>");
+					$("#nosearch").css({"color": "gray"});
 				}
 				else
 				{

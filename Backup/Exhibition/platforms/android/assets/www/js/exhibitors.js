@@ -404,6 +404,8 @@ var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 //to fetch exhibitors within a particular sector
 function eachSector(item)
 {
+$("#sectorContent").find("div").remove();
+$("#pclose").hide();
 myApp.showPreloader();
 var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
@@ -445,7 +447,7 @@ var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 				for(var j=0;j<response.secExhibitorInformation.length;j++)
 				{ 
 
-				$('#sectorContent').append('<div class="list-block media-list" style="margin:0px 0px" ><ul><li><a href="exhibitorProfile2.html" class="item-link item-content" id="'+id[j]+'" onclick="getEachExhibitor(this)"><div class="item-media"><img src="'+logolink[j]+'" width="100"></div><div class="item-inner"><div class="item-title-row"><div class="item-title"><b>'+companyName[j]+'</b></div><div class="item-after"></div></div><div class="item-text" style="text-align:left">'+about[j]+'</div></div></a></li></ul></div>');
+				$('#sectorContent').append('<div class="list-block media-list"><ul><li><a href="exhibitorProfile2.html" class="item-link item-content" id="'+id[j]+'" onclick="getEachExhibitor(this)"><div class="item-media"><img src="'+logolink[j]+'" width="100"></div><div class="item-inner"><div class="item-title-row"><div class="item-title"><b>'+companyName[j]+'</b></div><div class="item-after"></div></div><div class="item-text" style="text-align:left">'+about[j]+'</div></div></a></li></ul></div>');
 				} 
 				
 			}	

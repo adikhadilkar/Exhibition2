@@ -20,22 +20,22 @@
 			 <div class="item-inner"> 			 
               <div class="item-title floating-label">Enter Subject</div>
               <div class="item-input">
-                <input type="text"  name="name"  id="name" placeholder="" />
+                <input type="text"  name="subject"  id="subject" placeholder="" />
               </div>  
             </div>
           </div>
         </li>
 		
-		<li class="item-content">
-			<div class="item-content">
-            <center><br><div class="item-media"><i class="icon icon-form-comment"></i></div></center> 
-			 <div class="item-inner"> 			 
-              <div class="item-title floating-label">Enter Feedback</div>
+		  
+		  <li class="item-content">
+			<div class="item-media" style="padding-bottom:40px"><i class="icon icon-form-comment"></i></div>
+            <div class="item-inner"> 
+			<div class="label" id="noteError" name = "noteError" style="color:#ff0000"></div>
+              <div class="item-title floating-label">Enter Feedback*</div>
               <div class="item-input">
-				<textarea rows="4" cols="90" placeholder=""></textarea>
-				</div>
+			  <textarea rows="4" cols="90" placeholder="" wrap="true" id="feedback" name="feedback"></textarea>
+              </div>
             </div>
-          </div>
           </li>
 		  
 		  
@@ -53,17 +53,11 @@
           
         </ul>
       </div>
-      <div class="content-block"><a href="#" class="button button-fill button-raised color-red" onclick="#">Send</a>
-	  
-	
-	  <a href="#" id="next"></a>
-	  <!-- <div class="content-block"> onclick="signup()"
-        <div class="list-block-label">Some text about login information.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-      </div>-->
-	  
+      <a href="#" class="button button-fill button-raised color-red" onclick="sendfeedback()">Send</a>
+
 	  
     </form>
 
-  </div>
+  
 </div>
 </div>
