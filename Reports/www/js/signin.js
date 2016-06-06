@@ -1,5 +1,6 @@
 function signin()
 {
+	//here we give the server name
 	var request = createCORSRequest( "post", "http://alienpro.in" );
 	if(request)
 	{
@@ -22,6 +23,7 @@ function signin()
 			{   
 				$.ajax
 				({
+				//exact path of php file to be accessed
 				url: 'http://alienpro.in/usera/create_otp_json.php',
 				type: 'POST',
 				contentType: 'application/json',
@@ -72,6 +74,7 @@ function verifyotp()
 {
 	var otp = document.getElementById('otp').value;
 	var mobile=localStorage.getItem("mobileNo");
+	//here we give the server name
 	var request = createCORSRequest( "post", "http://alienpro.in" );
 	if(request)
 	{
@@ -83,6 +86,7 @@ function verifyotp()
 			{   
 				$.ajax
 				({
+				//exact path of php file to be accessed
 				url: 'http://alienpro.in/usera/login_details.php',
 				type: 'POST',
 				contentType: 'application/json',
@@ -128,11 +132,13 @@ function accept()
 	var flag='1';//this is our flag
 	var d=JSON.parse(localStorage.getItem("doctorId"));
 	var u=localStorage.getItem("uuid");
+	//here we give the server name
 	var request = createCORSRequest( "post", "http://alienpro.in" );
 	if(request)
 	{
 		$.ajax
 				({
+				//exact path of php file to be accessed
 				url: 'http://alienpro.in/usera/accept_reject_json.php',
 				type:"post",
 				data:{type:d},
@@ -168,11 +174,13 @@ function reject()
 	var flag='2';//this is our flag
 	var d1=JSON.parse(localStorage.getItem("doctorId"));
 	var u=localStorage.getItem("uuid");
+	//here we give the server name
 	var request = createCORSRequest( "post", "http://alienpro.in" );
 	if(request)
 	{
 		$.ajax
 				({
+				//exact path of php file to be accessed
 				url: 'http://alienpro.in/usera/doctors_reject_json.php',		
 				type:"post",
 				data:{type1:d1},
@@ -216,7 +224,8 @@ function resend()
 	try
 	{
 		var di=JSON.parse(localStorage.getItem("doctorId"));
-		tx.executeSql('select * from csv where status=0 AND did='+di, [], resultSuccess, resultError);
+		/* tx.executeSql('select * from csv where status=0 AND did='+di, [], resultSuccess, resultError); */
+		tx.executeSql('select * from csv where status=0 AND did="'+di+'";', [], resultSuccess, resultError);
 		
 	}
 	catch(err)

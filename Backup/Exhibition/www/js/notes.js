@@ -14,7 +14,7 @@ function getNotes()
 		
 		myApp.hidePreloader();
 		var n=Object.keys(data.notesInformation).length;
-		
+		alert(n);
 		if(n>0)
 		{
 		//var id1 = []; // create array here
@@ -260,9 +260,9 @@ function addNote()
 	var title = document.getElementById('title2').value;
 	var content = document.getElementById('note2').value;
 	//var title1 = encodeURI(title);
-	//alert(title1);
+	alert(title);
 	var content2 = encodeURI(content);
-	//alert(content2);
+	alert(content2);
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 
 	if(request)
@@ -278,7 +278,8 @@ function addNote()
 		dataType:"json",
 		success:function(response)
 		{
-					if(JSON.stringify(response.status)==200)
+				
+				if(JSON.stringify(response.status)==200)
 						{
 							myApp.hidePreloader();	
 							myApp.alert('Successfully added','Note');

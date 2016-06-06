@@ -3,6 +3,7 @@ function navi()
 	$("#loc").text("OFF");
 	$("#loc").css('color', 'red');
 	myApp.showPreloader('Collecting Data');
+	//here we give the server name
 	var request = createCORSRequest( "post", "http://alienpro.in" );
 	if(request)
 	{
@@ -31,7 +32,7 @@ function locationSend()
 	var lat=localStorage.getItem("latitude");
 	var lon=localStorage.getItem("longitude");
 	var uuid=localStorage.getItem("uuid");
-	
+	//here we give the server name
 	var request = createCORSRequest( "post", "http://alienpro.in" );
 	if(request)
 	{
@@ -43,6 +44,7 @@ function locationSend()
 	var sendData = function(data)
 	{
 	$.ajax({
+		//exact path of php file to be accessed
 		url:"http://alienpro.in/usera/location_new_json.php",
 		dataType:"json",
 		type: 'POST',
@@ -75,7 +77,7 @@ function sendInfo()
 {	
 	//getting device id
 	var dv=localStorage.getItem("dvid");
-	
+	//Here we have to change the IP address with port number if xampp and without port number if wamp
 	var request = createCORSRequest( "post", "http://192.168.1.5:80/Test_Local_Server_Db/" );
 	if(request)
 	{
@@ -84,6 +86,7 @@ function sendInfo()
 			{   
 				$.ajax
 				({
+				//Here we have to change the IP address with port number if xampp and without port number if wamp
 				url: 'http://192.168.1.5:80/Test_Local_Server_Db/data_json.php',
 				type: 'POST',
 				contentType: 'application/json',
@@ -178,7 +181,7 @@ function send()
 		var di=JSON.parse(localStorage.getItem("doctorId"));
 		
 		tx.executeSql('DROP TABLE IF EXISTS csv');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS csv(pt_transaction INTEGER,date TEXT,name TEXT, pid INTEGER,did INTEGER, dname TEXT, cut INTEGER,investigation INTEGER,deviceId TEXT,user TEXT,status INTEGER)');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS csv(pt_transaction INTEGER,date TEXT,name TEXT, pid INTEGER,did TEXT, dname TEXT, cut INTEGER,investigation INTEGER,deviceId TEXT,user TEXT,status INTEGER)');
 		
 		var i,j,k,l,m,n,o,p,q,r,s;
 		for(i=0;i<fileArray.length;i+=11)
