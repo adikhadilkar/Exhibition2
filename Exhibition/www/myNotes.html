@@ -1,13 +1,13 @@
 <div data-page="lazy-load" class="page">
   <div class="navbar">
     <div class="navbar-inner">
-      <div class="left"><a href="myNotes.html" class="back link icon-only" onclick="goBack()"><i class="icon icon-back"></i></a></div>
+      <!-- <div class="left"><a href="myNotes.html" class="back link icon-only" onclick="goBack()"><i class="icon icon-back"></i></a></div> -->
       <div class="center">Notes</div>
       <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
     </div>
   </div>
   	
-	<div class="speed-dial">
+	<div class="speed-dial" id="speed">
 		<!-- FAB inside will open Speed Dial actions -->
 		<a href="addNote.html" class="floating-button">
 		<!-- First icon is visible when Speed Dial actions are closed -->
@@ -42,7 +42,7 @@
 	}
 		</style>
 		
-		<div id="notesOutput">
+		<div id="notesOutput" style="overflow:auto;">
 			<a href="#" id="nextNote"></a>
 		</div>
 		

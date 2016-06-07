@@ -14,7 +14,7 @@ function getNotes()
 		
 		myApp.hidePreloader();
 		var n=Object.keys(data.notesInformation).length;
-		alert(n);
+		//alert(n);
 		if(n>0)
 		{
 		//var id1 = []; // create array here

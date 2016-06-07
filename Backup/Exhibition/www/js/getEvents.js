@@ -47,6 +47,7 @@ var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 		$.each(data.eventsInformation, function (index, eventsInformation) {
         starttime.push(eventsInformation.starttime); //push values here
 		});
+		
 		//alert(starttime);
 		
 		//array for endtime
