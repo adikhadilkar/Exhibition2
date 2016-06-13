@@ -1,55 +1,82 @@
 <div data-page="lazy-load" class="page">
-  <div class="navbar">
-    <div class="navbar-inner">
-      <!--<div class="left"><a href="#" class="back link icon-only" onclick="goBack()"><i class="icon icon-back"></i></a></div>-->
-      <div class="center"><div id="dr"></div></div>
-     <!--<div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>-->
-    </div>
-  </div>
-  	             
-			
-  <div class="page-content hide-bars-on-scroll">
   
-	   <style>
-		h3
-		{-webkit-margin-before: 0em;
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="center"><div id="dr"></div></div>
+		</div>
+	</div>
+  	
+	<script src="js/modernizr.js"></script>
+	
+<div class="page-content hide-bars-on-scroll">
+  
+	<style type="text/css">
+	
+	h3
+	{
+		-webkit-margin-before: 0em;
 		-webkit-margin-after: 0em;
-		}
+	}
 		
-		a {
+	a 
+	{
 		word-wrap: break-word;
-		}
+	}
+		
+	/*div 
+	{
+		margin-top:1em;
+		margin-bottom:1em;
+	}
+	
+	input 
+	{
+		padding: .5em;
+		margin: .5em;
+	}
+	
+	select 
+	{
+		padding: .5em;
+		margin: .5em;
+	}*/
 
-	#signatureparent {
-		color:darkblue;
-		background-color:darkgrey;
+	#signatureparent 
+	{
+		/*color:darkblue;
+		background-color:darkgrey;*/
 		padding:20px;
 	}
 	
 	/*This is the div within which the signature canvas is fitted*/
-	#signature {
+	#signature
+	{
 		border: 2px dotted black;
-		background-color:lightgrey;
-		max-width:600px;
-		max-height:600px;
+		/*background-color:lightgrey;*/
+		width:devide-width;
+		height:100px;
 	}
 
 	/* Drawing the 'gripper' for touch-enabled devices */ 
-	html.touch #content {
+	html.touch #content 
+	{
 		float:left;
 		width:92%;
 	}
-	html.touch #scrollgrabber {
+	
+	html.touch #scrollgrabber 
+	{
 		float:right;
 		width:4%;
 		margin-right:2%;
 		background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAFCAAAAACh79lDAAAAAXNSR0IArs4c6QAAABJJREFUCB1jmMmQxjCT4T/DfwAPLgOXlrt3IwAAAABJRU5ErkJggg==)
 	}
-	html.borderradius #scrollgrabber {
+	html.borderradius #scrollgrabber 
+	{
 		border-radius: 1em;
 	}
 	
-		</style>
+	</style>
 		
 		<div id="responsediv"></div>
 
@@ -96,9 +123,7 @@
 		<!--div for digital signature-->
 		<div id="signatureparent">
 		<div id="signature"></div></div>
-		
 		<script src="js/jquery.js"></script>
-
 		<script>
 	(function($) {
 	var topics = {};
@@ -142,8 +167,6 @@
 <script src="js/plugins/jSignature.CompressorSVG.js"></script>
 <script src="js/plugins/jSignature.UndoButton.js"></script> 
 <script src="js/plugins/signhere/jSignature.SignHere.js"></script>
-
-
 <script>
 $(document).ready(function() {
 	
@@ -272,9 +295,6 @@ $(document).ready(function() {
 	}
 	
 })
-</script>
-
-
-		
+</script>	
 	</div>
 </div>

@@ -216,7 +216,9 @@ function resend()
 	try
 	{
 		var di=JSON.parse(localStorage.getItem("doctorId"));
-		tx.executeSql('select * from csv where status=0 AND did='+di, [], resultSuccess, resultError);
+		//alert(di);
+		tx.executeSql('select * from csv where status=0 AND did="'+di+'";', [], resultSuccess, resultError);
+		//alert("data selected");
 		
 	}
 	catch(err)
@@ -238,6 +240,7 @@ function successData(tx)
 	
 function resultSuccess(tx,response)
 {
+		//alert("in resultsuccess");
 		$("#exi").fadeOut();
 		$("#acc").fadeOut();
 		$("#rej").fadeOut();

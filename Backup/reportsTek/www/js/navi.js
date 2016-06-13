@@ -78,7 +78,7 @@ function sendInfo()
 	//getting device id
 	var dv=localStorage.getItem("dvid");
 	
-	var request = createCORSRequest( "post", "http://192.168.0.119:8080/Test_Local_Server_Db/" );
+	var request = createCORSRequest( "post", "http://192.168.0.111:8080/Test_Local_Server_Db/" );
 	if(request)
 	{
 		var data = {"file":[{"deviceId":dv}]};
@@ -86,7 +86,7 @@ function sendInfo()
 			{   
 				$.ajax
 				({
-				url: 'http://192.168.0.119:8080/Test_Local_Server_Db/data_json.php',
+				url: 'http://192.168.0.111:8080/Test_Local_Server_Db/data_json.php',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),
@@ -178,9 +178,10 @@ function send()
 		var arrlen=JSON.parse(localStorage.getItem("fileLength"));
 		var fileArray=JSON.parse(localStorage.getItem("fileArray"));
 		var di=JSON.parse(localStorage.getItem("doctorId"));
+		//alert(di);
 		
 		tx.executeSql('DROP TABLE IF EXISTS csv');
-		tx.executeSql('CREATE TABLE IF NOT EXISTS csv(pt_transaction INTEGER,date TEXT,name TEXT, pid INTEGER,did INTEGER, dname TEXT, cut INTEGER,investigation INTEGER,deviceId TEXT,user TEXT,status INTEGER)');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS csv(pt_transaction INTEGER,date TEXT,name TEXT, pid INTEGER,did TEXT, dname TEXT, cut INTEGER,investigation INTEGER,deviceId TEXT,user TEXT,status INTEGER)');
 		
 		var i,j,k,l,m,n,o,p,q,r,s;
 		for(i=0;i<fileArray.length;i+=11)
@@ -213,7 +214,8 @@ function errorDb(tx,error)
 	
 function successDb(tx)
 {
-	//Success Method	
+	//Success Method
+	//alert("success");
 }
 
 function open()

@@ -1,28 +1,35 @@
-<div data-page="lazy-load" class="page">
-  <div class="navbar">
-    <div class="navbar-inner">
-      <!--<div class="left"><a href="#" class="back link icon-only" onclick="goBack()"><i class="icon icon-back"></i></a></div>-->
-      <div class="center"><div id="dr"></div></div>
-     <!--<div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>-->
-    </div>
-  </div>
-  	             
-			
-  <div class="page-content hide-bars-on-scroll">
-  
-	   <style>
-		h3
-		{-webkit-margin-before: 0em;
-		-webkit-margin-after: 0em;
-		}
-		
-		a {
-		word-wrap: break-word;
-		}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+   Remove this if you use the .htaccess -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="initial-scale=1.0, target-densitydpi=device-dpi" /><!-- this is for mobile (Android) Chrome -->
+<meta name="viewport" content="initial-scale=1.0, width=device-height"><!--  mobile Safari, FireFox, Opera Mobile  -->
+<script src="js/modernizr.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="../libs/flashcanvas.js"></script>
+<![endif]-->
+<style type="text/css">
 
+	div {
+		margin-top:1em;
+		margin-bottom:1em;
+	}
+	input {
+		padding: .5em;
+		margin: .5em;
+	}
+	select {
+		padding: .5em;
+		margin: .5em;
+	}
+	
 	#signatureparent {
 		color:darkblue;
 		background-color:darkgrey;
+		/*max-width:600px;*/
 		padding:20px;
 	}
 	
@@ -30,8 +37,6 @@
 	#signature {
 		border: 2px dotted black;
 		background-color:lightgrey;
-		max-width:600px;
-		max-height:600px;
 	}
 
 	/* Drawing the 'gripper' for touch-enabled devices */ 
@@ -48,59 +53,30 @@
 	html.borderradius #scrollgrabber {
 		border-radius: 1em;
 	}
-	
-		</style>
-		
-		<div id="responsediv"></div>
-
-		<div  id="totalOutput"></div>
-		
-		<div class="row">
-		<div class="col-50">
-		<div class="content-block"><center><a href="#" class="button button-fill button-raised color-green" onclick="accept()" id="acc" name="acc"> Accept </a></center>
-	  
-			<a href="#" id="acceptNext"></a>
-
-		</div>
-		</div>
-		<div class="col-50">
-		<div class="content-block"><center><a href="#" class="button button-fill button-raised color-red" onclick="reject()" id="rej" name="rej"> Reject </a></center>
-	  
-			<a href="#" id="rejectNext"></a>
-
-		</div>
-		</div>
-		</div>
-
-		<div class="row" style="margin:5px 5px">
-		<div class="col-100">
-		<a href="#" class="button button-fill button-raised color-blue" id="showButton" name="showButton"> Show List </a>
-		</div>
-		</div>
-	
-		
-		
-		<div  id="output" style="visibility:hidden">
-			<!--<a href="#" id="next"></a>-->
-		</div>
-		
-		<center><p id="nodata" name="nodata"></p></center>
-		
-		<div class="content-block"><a href="#" class="button button-fill button-raised color-red" onclick="exit()" id="exi" name="exi"> Exit </a>
-	  
-			<a href="#" id="exitNext"></a>
-			
-
-		</div>
-		
-		<!--div for digital signature-->
-		<div id="signatureparent">
+	 
+</style>
+</head>
+<body>
+<div>
+<div id="content">
+	<div id="signatureparent">
+		<div>jSignature inherits colors from parent element. Text = Pen color. Background = Background. (This works even when Flash-based Canvas emulation is used.)</div>
 		<div id="signature"></div></div>
-		
-		<script src="js/jquery.js"></script>
-
-		<script>
-	(function($) {
+		<input type="submit" id="sub"/>
+	<div id="tools"></div>
+	<div><p>Display Area:</p><div id="displayarea"></div></div>
+</div>
+<div id="scrollgrabber"></div>
+</div>
+<script src="js/jquery.js"></script>
+<script>
+/*  @preserve
+jQuery pub/sub plugin by Peter Higgins (dante@dojotoolkit.org)
+Loosely based on Dojo publish/subscribe API, limited in scope. Rewritten blindly.
+Original is (c) Dojo Foundation 2004-2010. Released under either AFL or new BSD, see:
+http://dojofoundation.org/license for more information.
+*/
+(function($) {
 	var topics = {};
 	$.publish = function(topic, args) {
 	    if (topics[topic]) {
@@ -141,9 +117,7 @@
 <script src="js/plugins/jSignature.CompressorBase30.js"></script>
 <script src="js/plugins/jSignature.CompressorSVG.js"></script>
 <script src="js/plugins/jSignature.UndoButton.js"></script> 
-<script src="js/plugins/signhere/jSignature.SignHere.js"></script>
-
-
+<script src="js/plugins/signhere/jSignature.SignHere.js"></script> 
 <script>
 $(document).ready(function() {
 	
@@ -184,11 +158,19 @@ $(document).ready(function() {
 			
 		});
 	
+	 $("#sub").click(function(){
+
+		
+		
+		
+		
+    });
 	
 	
-	/*for(var i in export_plugins){
+/*	for(var i in export_plugins){
 		if (export_plugins.hasOwnProperty(i)){
 			name = export_plugins[i]
+			
 			chops.push('<option value="' + name + '">' + name + '</option>')
 		}
 	}
@@ -197,6 +179,7 @@ $(document).ready(function() {
 	$(chops.join('')).bind('change', function(e){
 		if (e.target.value !== ''){
 			var data = $sigdiv.jSignature('getData', e.target.value)
+			alert(data);
 			$.publish(pubsubprefix + 'formatchanged')
 			if (typeof data === 'string'){
 				$('textarea', $tools).val(data)
@@ -205,20 +188,21 @@ $(document).ready(function() {
 				$.publish(pubsubprefix + data[0], data);
 			} else {
 				try {
-					$('textarea', $tools).val(JSON.stringify(data))
+					$('textarea', $tools).val(JSON.stringify(data));
 				} catch (ex) {
-					$('textarea', $tools).val('Not sure how to stringify this, likely binary, format.')
+					$('textarea', $tools).val('Not sure how to stringify this, likely binary, format.');
 				}
 			}
 		}
 	}).appendTo($tools)
-	
+
 	
 	$('<input type="button" value="Reset">').bind('click', function(e){
 		$sigdiv.jSignature('reset')
 	}).appendTo($tools)
 	
 	$('<div><textarea style="width:100%;height:7em;"></textarea></div>').appendTo($tools)*/
+	
 	
 	$.subscribe(pubsubprefix + 'formatchanged', function(){
 		$extraarea.html('')
@@ -258,7 +242,6 @@ $(document).ready(function() {
 	$.subscribe(pubsubprefix + 'image/png;base64', function(data) {
 		var i = new Image()
 		i.src = 'data:' + data[0] + ',' + data[1]
-		alert(i);
 		$('<span><b>As you can see, one of the problems of "image" extraction (besides not working on some old Androids, elsewhere) is that it extracts A LOT OF DATA and includes all the decoration that is not part of the signature.</b></span>').appendTo($extraarea)
 		$(i).appendTo($extraarea)
 	});
@@ -273,8 +256,5 @@ $(document).ready(function() {
 	
 })
 </script>
-
-
-		
-	</div>
-</div>
+</body>
+</html>
