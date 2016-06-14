@@ -1,6 +1,7 @@
 function forgotpass()
 {
 	var Otp = localStorage.getItem("otp");
+	alert(otp);
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
@@ -49,7 +50,7 @@ function forgotpass()
 			$("#confirmPasswordError").fadeIn();
 		}
 		
-		if(mobileNoValidate)
+		if(mobileNoValidate && otpValidate && newPasswordValidate && confirmPasswordValidate)
 		{
 		var data = {"password":[{"pOtp":Otp,"nOtp":otp,"mobileNo":mobileNo,"newPassword":newPassword,"confirmPassword":confirmPassword}]};
 			var sendData = function(data)
