@@ -14,8 +14,8 @@ $response=array();
 //select photos in a particular album 
 @$selectPhotosQuery="SELECT m.mediaId, m.caption, z.link
 FROM exhibitionAlbum_media m, media z
-WHERE m.mediaId = z.id
-AND m.exhibitionAlbumId = '$albumId'";
+WHERE m.exhibitionAlbumId = '$albumId'
+AND m.mediaId = z.id";
 @$selectPhotos=mysql_query($selectPhotosQuery,$conn) or die(mysql_error());
 @$photoRows=mysql_num_rows($selectPhotos);
 
@@ -28,7 +28,7 @@ while($photos=mysql_fetch_array($selectPhotos))
 		array_push($data,$response);	
 } 
 
-	$json= json_encode($data,JSON_NUMERIC_CHECK);     
+$json= json_encode($data,JSON_NUMERIC_CHECK);     
 	deliver_response(200,"photos","photosInformation",$data);
 
 ?>

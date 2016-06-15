@@ -1,6 +1,7 @@
 function navi()
 {
 	localStorage.clear();
+	$("#speed").hide();
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
