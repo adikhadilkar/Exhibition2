@@ -1,7 +1,8 @@
 function getNotes()
 {
 	myApp.showPreloader();
-	$("#nodata").fadeOut();	
+	$("#nodata").fadeOut();
+	$("#notesOutput").find("div").remove();
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
@@ -13,8 +14,9 @@ function getNotes()
 		{
 		
 		myApp.hidePreloader();
+		$("#speed").show();
 		var n=Object.keys(data.notesInformation).length;
-		alert(n);
+		//alert(n);
 		if(n>0)
 		{
 		//var id1 = []; // create array here
@@ -49,7 +51,7 @@ function getNotes()
 			//alert(z);
 			//var x=decodeURI(notes[i]);
 			//alert(x);
-			$('#notesOutput').append('<a href="eachNote.html" class="item-link close-panel" id="'+id[i]+'" onclick="getEachNote(this)"><div class="card"><div class="card-header" style="color:black"><b>'+notesTitle[i]+'</b></div><div class="card-content" ><div class="card-content-inner" style="padding-left: 15px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; word-wrap:break-word"><pre style="white-space: pre-wrap;"><font face="Roboto" color="black">'+notes[i]+'</font></pre></div></div></div></a>');
+			$('#notesOutput').append('<a href="eachNote.html" class="item-link close-panel" id="'+id[i]+'" onclick="getEachNote(this)"><div class="card" style="background-color: #FFFFFF;"><div class="card-header" style="overflow:auto"><b>'+notesTitle[i]+'</b></div><div class="card-content" ><div class="card-content-inner" style="padding-left: 15px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; word-wrap:break-word"><pre style="white-space: pre-wrap;"><font face="Roboto" color="black">'+notes[i]+'</font></pre></div></div></div></a>');
 		}
 		}
 		else
@@ -205,9 +207,11 @@ function updateNote()
 		{
 					if(JSON.stringify(response.status)==200)
 						{
-							myApp.hidePreloader();	
-							myApp.alert('Successfully Updated','Note');
-							mainView.router.loadPage("logo.html");
+							myApp.hidePreloader();
+							getNotes();
+							mainView.router.loadPage("myNotes.html");
+							//myApp.alert('Successfully Updated','Note');
+							//mainView.router.loadPage("logo.html");
 							/* var a = document.getElementById('nextNote');
 							a.setAttribute("href","logo.html");
 							document.getElementById('nextNote').click(); */
@@ -223,6 +227,9 @@ function updateNote()
 
 function deleteNote()
 {
+	var title = localStorage.getItem("notesTitle");
+	
+	myApp.confirm('Do you really want to delete?',title, function () {	
 	myApp.showPreloader();
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
@@ -243,14 +250,17 @@ function deleteNote()
 			if(JSON.stringify(response.status)==200)
 			{
 					myApp.hidePreloader();	
-					myApp.alert('Successfully Deleted','Note');
-					mainView.router.loadPage("logo.html");
+					//myApp.alert('Successfully Deleted','Note');
+					getNotes();
+					mainView.router.loadPage("myNotes.html");
 			}
 		}
 		});
 		}
 			getData(data);
 	}
+		
+	});
 }
 
 //to add notes
@@ -260,9 +270,9 @@ function addNote()
 	var title = document.getElementById('title2').value;
 	var content = document.getElementById('note2').value;
 	//var title1 = encodeURI(title);
-	alert(title);
+	//alert(title);
 	var content2 = encodeURI(content);
-	alert(content2);
+	
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 
 	if(request)
@@ -282,8 +292,10 @@ function addNote()
 				if(JSON.stringify(response.status)==200)
 						{
 							myApp.hidePreloader();	
-							myApp.alert('Successfully added','Note');
-							mainView.router.loadPage("logo.html");
+							//myApp.alert('Successfully added','Note');
+							getNotes();
+							mainView.router.loadPage("myNotes.html");
+							
 						}
 		}
 	  

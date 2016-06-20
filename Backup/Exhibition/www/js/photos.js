@@ -95,32 +95,38 @@ function getAllphotos(item)
 			$.ajax({
 			url:"http://radio.tekticks.com/exhibition/eachAlbumPhotos.php",
 			type: 'POST', 
-			dataType:"json",
+			dataType:'json',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
 			success:function(response)
 			{
 				if(JSON.stringify(response.status)==200)
 				{
+					myApp.hidePreloader();
+					
+					var n=Object.keys(response.photosInformation).length;
+					if(n>0)
+					{
 						 var mediaId = []; // create array here
-						$.each(data.photosInformation, function (index, photosInformation) {
+						$.each(response.photosInformation, function (index, photosInformation) {
 						mediaId.push(photosInformation.mediaId); //push values here
 						});
-						alert(caption);
+						alert(mediaId);
 						
 						var caption = []; // create array here
-						$.each(data.photosInformation, function (index, photosInformation) {
+						$.each(response.photosInformation, function (index, photosInformation) {
 						caption.push(photosInformation.caption); //push values here
 						});
 						alert(caption);
 						
 						var link = []; // create array here
-						$.each(data.photosInformation, function (index, photosInformation) {
+						$.each(response.photosInformation, function (index, photosInformation) {
 						link.push(photosInformation.link); //push values here
 						});
 						alert(link); 
 						
-						 for(var i=0;i<n;i++)
+						
+						for(var i=0;i<n;i++)
 						{ 	
 						if(n % 2 == 0)
 						{		
@@ -132,18 +138,26 @@ function getAllphotos(item)
 							$('#photoOutput').append('<div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center>'+caption[i]+'</center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center>'+caption[i+1]+'</center></span></div></a></div></div>');
 							i++;
 							
-							 if(number[i] === undefined)
-								{ 
-								$('#photo'+[i]+'').hide();	
+							 if(mediaId[i] === undefined)
+								{
+								$('#'+mediaId[i+1]+'').hide();
+								//$('#mediaId'+[i+1]+'').hide();	
 								}		 
 						}
 						var show = document.getElementById('photoOutput');
 						show.style.visibility = 'visible';		
-						myApp.hidePreloader();
+						
 						localStorage["caption"] = JSON.stringify(caption);
 						localStorage["link"] = JSON.stringify(link);
 					}
-					 
+						
+					}
+					else
+					{
+						myApp.hidePreloader();
+						myApp.alert('No photos in this album!');
+					} 
+
 				}
 			
 			}
