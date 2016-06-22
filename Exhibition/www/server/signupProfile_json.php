@@ -27,6 +27,15 @@ $profilePic=$data['profile'][0]['profilePicture'];
 		//$dob=strtotime('27-10-1987');
 		$dob = date('Y-m-d',strtotime($pBirthDate));
 
+	/* if($pGender=='M')
+	{
+		$pGender='1';
+	}
+	else
+	{
+		$pGender='2';
+	} */
+		
 //@$createdon = date('Y-m-d h:i:s', time());			
 $updateVisitorProfileQuery="update visitorProfile
 set name='$pname',

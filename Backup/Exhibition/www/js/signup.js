@@ -195,3 +195,7 @@ function verifyotp()
 	}
 }
 
+function resend()
+{
+	myApp.alert('Your OTP is 1234','One Time Password');
+}

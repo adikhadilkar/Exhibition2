@@ -1,7 +1,7 @@
 function forgotpass()
 {
 	var Otp = localStorage.getItem("otp");
-	alert(otp);
+	//alert(otp);
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
