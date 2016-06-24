@@ -59,6 +59,8 @@ var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 		{
 				myApp.hidePreloader();
 			myApp.alert('There are no more Exhibitors for you.','Exhibitors');
+			$("#alphabet").html("<center><h1>No Data!</h1></center>");
+			$("#alphabet").css({"color": "gray","padding-top":"50%"});
 		}
 		
 		}
@@ -393,6 +395,9 @@ var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 		{
 				myApp.hidePreloader();
 			myApp.alert('There are no Sectors','Exhibitors');
+			$("#sector").html("<center><h1>No Data!</h1></center>");
+			$("#sector").css({"color": "gray","padding-top":"50%"});
+			
 		}
 		
 		}

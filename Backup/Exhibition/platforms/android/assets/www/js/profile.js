@@ -21,7 +21,9 @@ function getprofile()
 		{
 			myApp.hidePreloader();	
 			//var Pic= JSON.stringify(response.visitor[0].profilePic).replace(/"/g,"");
-					//$(".floating-label").hide();
+					var show = document.getElementById('profPage');
+					show.style.visibility = 'visible';
+
 					$("#pName").text(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
 					$("#pEmailId").text(JSON.stringify(response.visitor[0].emailId).replace(/"/g,""));
 					$("#pMobileNo").text(JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,""));
@@ -38,7 +40,8 @@ function getprofile()
 					{
 						
 						 document.getElementById("prof1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url("data:image/(png|jpg);base64,'+p1+'")'; 
-					}	 
+					}
+					//$("#profPage").show();
 		}
 		});
 		}
@@ -86,7 +89,7 @@ function sendProfile()
 					document.getElementById("pEducation").value = JSON.stringify(response.visitor[0].education).replace(/"/g,"");
 					
 					document.getElementById("pProfession").value = JSON.stringify(response.visitor[0].profession).replace(/"/g,"");
-				
+					alert(response.visitor[0].profilePic);
 					$("#profilePic").attr("src",response.visitor[0].profilePic);
 					//$("#pname").val(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
 					//$("#pMobile").text(JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,""));
@@ -128,9 +131,9 @@ function sendProfile()
 	var show = document.getElementById('profileShow');
     show.style.visibility = 'visible';
 	var profilePic = document.getElementById('profilePic').src;
-	//alert(profilePic);
+	alert(profilePic);
 	var profilePicture = getBase64Image(document.getElementById('profilePic'));
-	//alert(profilePicture);
+	alert(profilePicture);
 	
 		//alert('file base64 encoding: ' + base64);
 		//localStorage.setItem("profilePic",base64);

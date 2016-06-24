@@ -65,7 +65,8 @@ function validatePassword(password)
  
  function validateName(name)   
 {  //checking if name is empty
-	var letters = /^[A-Za-z]+$/; 
+	//var letters = /^[A-Za-z]+$/;
+	  var letters = /^[A-Za-z ]+$/;
 	
 	if(name == "")
 	{

@@ -24,9 +24,14 @@ function validatePassword(password)
 		$("#passwordError").text("Please enter a Password");
         return false;
 	}
-   else  
-     {  
+	else if(password.length < 6)
+	{
+		$("#passwordError").text("Password must be greater than 6 characters!");
+        return false;
+	}
+	else   
+    {  
        return true;  
-     }  
+    }  
  }
  
