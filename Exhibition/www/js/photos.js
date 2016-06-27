@@ -2,8 +2,8 @@
 function getExhibitions()
 {	
 	myApp.closePanel();
-  myApp.showPreloader();  
-  //$("#photos").show();	
+	myApp.showPreloader();  
+	//$("#photos").show();	
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
@@ -15,23 +15,23 @@ function getExhibitions()
 		{
 			var n=Object.keys(data.exhibitionsInformation).length;
 			if(n>0)
-		{
-			var ExhibitionId = []; // create array here
-			$.each(data.exhibitionsInformation, function (index, exhibitionsInformation) {
+			{
+				var ExhibitionId = []; // create array here
+				$.each(data.exhibitionsInformation, function (index, exhibitionsInformation) {
 				ExhibitionId.push(exhibitionsInformation.id); //push values here
-			});
+				});
 		 
-			//array for exhibition name
-			var name = []; // create array here
-			$.each(data.exhibitionsInformation, function (index,exhibitionsInformation) {
+				//array for exhibition name
+				var name = []; // create array here
+				$.each(data.exhibitionsInformation, function (index,exhibitionsInformation) {
 				name.push(exhibitionsInformation.name); //push values here
-			}); 
+				}); 
 		 
-			//array for albumCover
-			var exhibitionLink = []; // create array here
-			$.each(data.exhibitionsInformation, function (index, exhibitionsInformation) {
+				//array for albumCover
+				var exhibitionLink = []; // create array here
+				$.each(data.exhibitionsInformation, function (index, exhibitionsInformation) {
 				exhibitionLink.push(exhibitionsInformation.link); //push values here
-			});
+				});
 		 
 		/* 	for(var i=0;i<n;i++)
 			{ 
@@ -48,18 +48,21 @@ function getExhibitions()
 				}
 				else
 				{
+					//alert(ExhibitionId[i]);
+					//alert(ExhibitionId[i+1]);
 					$('#exhibitionPhotos').append('<div class="row no-gutter" style="margin:0px 0px;padding-top:1px"><div class="col-50" style="padding:1px"><a href="gallery.html" id="'+ExhibitionId[i]+'" onclick="getPhotos(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+exhibitionLink[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center><b>'+name[i]+'</b></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="gallery.html" id="'+ExhibitionId[i+1]+'" onclick="getPhotos(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+exhibitionLink[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center><b>'+name[i+1]+'</b></center></span></div></a></div></div>');
-				i++;
+					i++;
 					
 					if(ExhibitionId[i] === undefined)
-				{ 
-				//alert(albumId[i]);
-				/* var show = document.getElementById(''+albumId[i+1]+'');
-				
-					show.style.visibility = 'hidden';
-				}				 */
-					$('#'+ExhibitionId[i+1]+'').hide();
-				}
+					{ 
+						/* var show = document.getElementById(''+albumId[i+1]+'');
+						show.style.visibility = 'hidden'; */
+					
+						//hides all the div where id is undefined
+						$("[id=undefined]").hide();
+					
+						//$('#'+ExhibitionId[i]+'').hide();
+					}
 			}
 			}
 			var show = document.getElementById('exhibitionPhotos');
@@ -70,9 +73,6 @@ function getExhibitions()
 		{
 				myApp.hidePreloader();
 			myApp.alert('There are no more Exhibitions to view.', function () {
-			//cument.getElementById('bcktohome').click();
-			//mainView.router.back(); 
-			//showLeftPanel();
     });
 		}
 		}
@@ -83,7 +83,8 @@ function getExhibitions()
 
 //function to get albums
 function getPhotos(item)
-{	
+{
+	myApp.closePanel();
   myApp.showPreloader();
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
@@ -104,7 +105,8 @@ function getPhotos(item)
 			{
 				if(JSON.stringify(response.status)==200)
 				{
-					
+					if(response.albumsInformation.length>0)
+					{
 					var exhibitionName = [];
 					var albumId = [];
 					var albumTitle = [];
@@ -119,11 +121,11 @@ function getPhotos(item)
 					albumCoverLink[j]= JSON.stringify(response.albumsInformation[j].link).replace(/"/g,"");
 					}
 					
-					alert(response.albumsInformation.length);
-					alert(exhibitionName);
-					alert(albumId);
-					alert(albumTitle);
-					alert(albumCoverLink);
+					//alert(response.albumsInformation.length);
+					//alert(exhibitionName);
+					//alert(albumId);
+					//alert(albumTitle);
+					//alert(albumCoverLink);
 		 
 			for(var i=0;i<response.albumsInformation.length;i++)
 			{ 
@@ -137,18 +139,23 @@ function getPhotos(item)
 				{
 					$( "#exhibitionName" ).text(exhibitionName[0]);
 					$('#photos').append('<div class="row no-gutter" style="margin:0px 0px;padding-top:1px"><div class="col-50" style="padding:1px"><a href="eachPhoto.html" id="'+albumId[i]+'" onclick="getAllphotos(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+albumCoverLink[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center>'+albumTitle[i]+'</center></span></div></a></div><div class="col-50" style="padding:1px"><a href="eachPhoto.html" id="'+albumId[i+1]+'"  onclick="getAllphotos(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+albumCoverLink[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center>'+albumTitle[i+1]+'</center></span></div></a></div></div>');
-				i++;
-					
+					i++;
 					if(albumId[i] === undefined)
-				{ 
-					$('#'+albumId[i+1]+'').hide();
-				}
+					{
+					//hides all the div where id is undefined
+					 $("[id=undefined]").hide();
+					}
 			}
 			}
 			var show = document.getElementById('photos');
 			show.style.visibility = 'visible';
 			myApp.hidePreloader();
-
+				}
+				else
+				{
+					myApp.hidePreloader();
+					myApp.alert('No Albums Available','Albums');
+				}
 				}
 			
 			}
@@ -213,8 +220,6 @@ function getAllphotos(item)
 						});
 						//alert(albumTitle);
 
-						var cover=response.photosInformation.cover;
-						//alert(cover);
 						var n=Object.keys(response.photosInformation).length;
 						//alert(n);
 						for(var i=0;i<n;i++)
@@ -237,8 +242,11 @@ function getAllphotos(item)
 							
 							 if(mediaId[i] === undefined)
 								{
-								$('#'+mediaId[i+1]+'').hide();
-								//$('#mediaId'+[i+1]+'').hide();	
+								//$('#'+mediaId[i]+'').hide();
+								//$('#mediaId'+[i+1]+'').hide();
+								
+								//hides all the div where id is undefined
+								$("[id=undefined]").hide();
 								}		 
 						}
 						var show = document.getElementById('photoOutput');
@@ -308,8 +316,8 @@ function openPhoto(index)
 		myApp.hidePreloader();
 }
 
-function photoRefresh()
+function exhibitionRefresh()
 {
-	$("#photos").find("div").remove();
-	getPhotos();
+	$("#exhibitionPhotos").find("div").remove();
+	getExhibitions();
 }
