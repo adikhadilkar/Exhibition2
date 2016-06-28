@@ -12,18 +12,26 @@ $jsonresponse=array();
 $exhibitionId=$data['album'][0]['albumId'];
 $response=array();
 
+//to get cover pic of an album
+$coverLink = mysql_query("SELECT a.link
+FROM media a, exhibitionBannerMedia b, exhibitionAlbum c
+WHERE c.id = b.id
+AND b.mediaId = a.id
+AND b.id ='$exhibitionId'");
+$row = mysql_fetch_row($coverLink);
+
 //select photos in a particular album 
-@$selectPhotosQuery="SELECT m.mediaId, m.caption, y.id, y.albumTitle, z.link,a.mediaId
-FROM exhibitionAlbum_media m, exhibitionAlbum y, media z,exhibitionBannerMedia a
-WHERE m.mediaId = z.id AND y.id=m.exhibitionAlbumId
-AND m.exhibitionAlbumId = y.id AND y.exhibitionId='exhibitionId' AND a.exhibitionId='exhibitionId'";
+@$selectPhotosQuery="SELECT y.id, y.albumTitle, z.link
+FROM exhibitionAlbum_media m, exhibitionAlbum y, media z
+WHERE y.id=m.exhibitionAlbumId AND m.mediaId=z.id
+AND y.id='$exhibitionId'";
 @$selectPhotos=mysql_query($selectPhotosQuery,$conn) or die(mysql_error());
 @$photoRows=mysql_num_rows($selectPhotos);
 
 while($photos=mysql_fetch_array($selectPhotos))
 {
-		$response['mediaId'] = $photos['mediaId'];
-		$response['caption'] = $photos['caption'];
+		$response['mediaId'] = $photos['id'];
+		$response['coverLink'] = $row[0];
 		$response['link']= $photos['link'];
 		$response['albumTitle']= $photos['albumTitle'];
 		array_push($data1,$response);	

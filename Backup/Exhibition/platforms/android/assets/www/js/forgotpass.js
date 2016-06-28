@@ -1,12 +1,13 @@
 function forgotpass()
 {
+	
 	var Otp = localStorage.getItem("otp");
 	//alert(otp);
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
-		
 		var mobileNo = document.getElementById('mobileNo').value;
+		//alert(mobileNo);
 		var mobileNoValidate = validatePhone(mobileNo);
 		if(mobileNoValidate)
 		{
@@ -52,6 +53,7 @@ function forgotpass()
 		
 		if(mobileNoValidate && otpValidate && newPasswordValidate && confirmPasswordValidate)
 		{
+			myApp.showPreloader();
 		var data = {"password":[{"pOtp":Otp,"nOtp":otp,"mobileNo":mobileNo,"newPassword":newPassword,"confirmPassword":confirmPassword}]};
 			var sendData = function(data)
 			{   
@@ -66,7 +68,7 @@ function forgotpass()
 										{
 						if(JSON.stringify(response.status)==200)
 						{
-							
+							myApp.hidePreloader();
 							myApp.alert('Password Changed','Password');
 							
 							navi();
@@ -78,6 +80,7 @@ function forgotpass()
 						}
 						else if(JSON.stringify(response.status)==203)
 						{
+							myApp.hidePreloader();
 							$("#newPasswordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
 							$("#newPasswordError").fadeIn();
 							$("#confirmPasswordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
@@ -86,10 +89,10 @@ function forgotpass()
 						
 						else if(JSON.stringify(response.status)==202)
 						{
+							myApp.hidePreloader();
 							$("#otpError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
 							$("#otpError").fadeIn();
 						}
-			
 					},
 					error: function(xhr, textStatus, error)
 					{
@@ -196,7 +199,7 @@ function changePassword()
 
 function generateOtp()
 {
-	
+	myApp.showPreloader();
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
@@ -216,18 +219,29 @@ function generateOtp()
 		{
 			if(JSON.stringify(response.status)==200)
 			{
+				$("#mobileError").fadeOut();
+				$("#moList").css("display", "none");
+				$("#buList").css("display", "none");
+				$("#otpList").css("display", "block");
+				$("#newPassList").css("display", "block");
+				$("#conPassList").css("display", "block");
+				$("#bu2List").css("display", "block");
+				$("#resend").css("display", "block");
+				myApp.hidePreloader();
 				var otp = JSON.stringify(response.otp).replace(/"/g,"");
 				localStorage.setItem("otp", otp);
 				myApp.alert('Your OTP Is '+otp,'One Time Password');
-				$("#mobileError").fadeOut();
+				
 			}
 			else if(JSON.stringify(response.status)==202)
 			{
+				myApp.hidePreloader();
 				$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
 				$("#mobileError").fadeIn();
 			}
 			else if(JSON.stringify(response.status)==203)
 			{
+				myApp.hidePreloader();
 				$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
 				$("#mobileError").fadeIn();
 				//myApp.alert('This Number Does Not Exist..Make A New Account!!','Error');

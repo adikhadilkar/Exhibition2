@@ -51,17 +51,18 @@ function getExhibitions()
 					//alert(ExhibitionId[i]);
 					//alert(ExhibitionId[i+1]);
 					$('#exhibitionPhotos').append('<div class="row no-gutter" style="margin:0px 0px;padding-top:1px"><div class="col-50" style="padding:1px"><a href="gallery.html" id="'+ExhibitionId[i]+'" onclick="getPhotos(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+exhibitionLink[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center><b>'+name[i]+'</b></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="gallery.html" id="'+ExhibitionId[i+1]+'" onclick="getPhotos(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+exhibitionLink[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center><b>'+name[i+1]+'</b></center></span></div></a></div></div>');
-				i++;
+					i++;
 					
 					if(ExhibitionId[i] === undefined)
-				{ 
-				//alert(albumId[i]);
-				/* var show = document.getElementById(''+albumId[i+1]+'');
-				
-					show.style.visibility = 'hidden';
-				}				 */
-					$('#'+ExhibitionId[i]+'').hide();
-				}
+					{ 
+						/* var show = document.getElementById(''+albumId[i+1]+'');
+						show.style.visibility = 'hidden'; */
+					
+						//hides all the div where id is undefined
+						$("[id=undefined]").hide();
+					
+						//$('#'+ExhibitionId[i]+'').hide();
+					}
 			}
 			}
 			var show = document.getElementById('exhibitionPhotos');
@@ -72,9 +73,6 @@ function getExhibitions()
 		{
 				myApp.hidePreloader();
 			myApp.alert('There are no more Exhibitions to view.', function () {
-			//cument.getElementById('bcktohome').click();
-			//mainView.router.back(); 
-			//showLeftPanel();
     });
 		}
 		}
@@ -123,11 +121,11 @@ function getPhotos(item)
 					albumCoverLink[j]= JSON.stringify(response.albumsInformation[j].link).replace(/"/g,"");
 					}
 					
-					alert(response.albumsInformation.length);
-					alert(exhibitionName);
-					alert(albumId);
-					alert(albumTitle);
-					alert(albumCoverLink);
+					//alert(response.albumsInformation.length);
+					//alert(exhibitionName);
+					//alert(albumId);
+					//alert(albumTitle);
+					//alert(albumCoverLink);
 		 
 			for(var i=0;i<response.albumsInformation.length;i++)
 			{ 
@@ -139,16 +137,13 @@ function getPhotos(item)
 				}
 				else
 				{
-					//alert(albumId[i]);
-					//alert(albumId[i+1]);
 					$( "#exhibitionName" ).text(exhibitionName[0]);
 					$('#photos').append('<div class="row no-gutter" style="margin:0px 0px;padding-top:1px"><div class="col-50" style="padding:1px"><a href="eachPhoto.html" id="'+albumId[i]+'" onclick="getAllphotos(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+albumCoverLink[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center>'+albumTitle[i]+'</center></span></div></a></div><div class="col-50" style="padding:1px"><a href="eachPhoto.html" id="'+albumId[i+1]+'"  onclick="getAllphotos(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+albumCoverLink[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center>'+albumTitle[i+1]+'</center></span></div></a></div></div>');
 					i++;
-					//alert(albumId[i]);
-					//alert(albumId[i+1]);
 					if(albumId[i] === undefined)
-					{ 
-					$('#'+albumId[i]+'').hide();
+					{
+					//hides all the div where id is undefined
+					 $("[id=undefined]").hide();
 					}
 			}
 			}
@@ -207,9 +202,9 @@ function getAllphotos(item)
 						});
 						//alert(mediaId);
 						
-						 var caption = []; // create array here
+						 var coverLink = []; // create array here
 						$.each(response.photosInformation, function (index, photosInformation) {
-						caption.push(photosInformation.caption); //push values here
+						coverLink.push(photosInformation.coverLink); //push values here
 						}); 
 						//alert(caption);
 						
@@ -225,8 +220,6 @@ function getAllphotos(item)
 						});
 						//alert(albumTitle);
 
-						var cover=response.photosInformation.cover;
-						//alert(cover);
 						var n=Object.keys(response.photosInformation).length;
 						//alert(n);
 						for(var i=0;i<n;i++)
@@ -236,7 +229,7 @@ function getAllphotos(item)
 						var number=i;
 						var nextNumber=i+1;
 						$( "#aName" ).text(albumTitle[0]);
-						$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url(http://lorempixel.com/1000/609/)" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
+						$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url('+coverLink[i]+')" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
 						i++;
 						}
 						else
@@ -244,19 +237,22 @@ function getAllphotos(item)
 							var number=i;
 							var nextNumber=i+1;
 							$( "#aName" ).text(albumTitle[0]);
-							$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url(http://lorempixel.com/1000/609/)" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
+							$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url('+coverLink[i]+')" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
 							i++;
 							
 							 if(mediaId[i] === undefined)
 								{
-								$('#'+mediaId[i]+'').hide();
-								//$('#mediaId'+[i+1]+'').hide();	
+								//$('#'+mediaId[i]+'').hide();
+								//$('#mediaId'+[i+1]+'').hide();
+								
+								//hides all the div where id is undefined
+								$("[id=undefined]").hide();
 								}		 
 						}
 						var show = document.getElementById('photoOutput');
 						show.style.visibility = 'visible';		
 						
-						localStorage["caption"] = JSON.stringify(caption);
+						localStorage["coverLink"] = JSON.stringify(coverLink);
 						localStorage["link"] = JSON.stringify(link);
 						localStorage["albumTitle"] = JSON.stringify(albumTitle[0]);
 					}
@@ -320,8 +316,8 @@ function openPhoto(index)
 		myApp.hidePreloader();
 }
 
-function photoRefresh()
+function exhibitionRefresh()
 {
-	$("#photos").find("div").remove();
-	getPhotos();
+	$("#exhibitionPhotos").find("div").remove();
+	getExhibitions();
 }

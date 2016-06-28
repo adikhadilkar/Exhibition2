@@ -73,6 +73,8 @@ var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 		{
 				myApp.hidePreloader();
 			myApp.alert('There are no more news for you.','News');
+			$("#newsOutput").html("<center><h1>No Data!</h1></center>");
+			$("#newsOutput").css({"color": "gray","padding-top":"50%"});
 		}
 		
 		}

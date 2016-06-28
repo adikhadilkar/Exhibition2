@@ -1,6 +1,6 @@
 function getprofile()
 {
-	//alert("getprofile");
+	alert("getprofile");
 	var request = createCORSRequest( "post", "http://radio.tekticks.com" );
 	if(request)
 	{
@@ -38,7 +38,6 @@ function getprofile()
 					}
 					else
 					{
-						
 						 document.getElementById("prof1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url("data:image/(png|jpg);base64,'+p1+'")'; 
 					}
 					//$("#profPage").show();
@@ -132,11 +131,12 @@ function sendProfile()
     show.style.visibility = 'visible';
 	var profilePic = document.getElementById('profilePic').src;
 	alert(profilePic);
-	var profilePicture = getBase64Image(document.getElementById('profilePic'));
-	alert(profilePicture);
+/* 	var profilePicture = getBase64Image(document.getElementById('profilePic'));
+	alert(profilePicture); */
 	
-		//alert('file base64 encoding: ' + base64);
-		//localStorage.setItem("profilePic",base64);
+		window.plugins.Base64.encodeFile(profilePic, function(base64){
+            console.log('file base64 encoding: ' + base64);
+			localStorage.setItem("profileImage",base64);
 		
 	var pname = document.getElementById('pname').value;
 	var pphone = document.getElementById('pMobile').value;
@@ -152,7 +152,7 @@ function sendProfile()
 	//alert(fileName);
 	if(request)
 	{
-		var data = {"profile":[{"visitorId":visitorId,"pname":pname,"pemail":pemail,"profilePicture":profilePicture,"pphone":pphone,"pGender":pGender,"pBirthDate":pBirthDate,"pEducation":pEducation,"pProfession":pProfession}]};
+		var data = {"profile":[{"visitorId":visitorId,"pname":pname,"pemail":pemail,"profilePicture":base64,"pphone":pphone,"pGender":pGender,"pBirthDate":pBirthDate,"pEducation":pEducation,"pProfession":pProfession}]};
 		var sendData = function(data)
 		{
 	$.ajax({

@@ -202,9 +202,9 @@ function getAllphotos(item)
 						});
 						//alert(mediaId);
 						
-						 var caption = []; // create array here
+						 var coverLink = []; // create array here
 						$.each(response.photosInformation, function (index, photosInformation) {
-						caption.push(photosInformation.caption); //push values here
+						coverLink.push(photosInformation.coverLink); //push values here
 						}); 
 						//alert(caption);
 						
@@ -229,7 +229,7 @@ function getAllphotos(item)
 						var number=i;
 						var nextNumber=i+1;
 						$( "#aName" ).text(albumTitle[0]);
-						$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url(http://lorempixel.com/1000/609/)" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
+						$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url('+coverLink[i]+')" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
 						i++;
 						}
 						else
@@ -237,7 +237,7 @@ function getAllphotos(item)
 							var number=i;
 							var nextNumber=i+1;
 							$( "#aName" ).text(albumTitle[0]);
-							$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url(http://lorempixel.com/1000/609/)" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
+							$('#photoOutput').append('<div class="card demo-card-header-pic" id="each" style="margin:0px 0px"><div style="background-image:url('+coverLink[i]+')" valign="bottom" class="card-header color-white no-border" width="100%" height="100%"><b><h2>'+albumTitle[0]+'</h2></b></div><div class="row no-gutter" style="margin:0px 0px;"><div class="col-50"style="padding:1px"><a href="#" id="'+mediaId[i]+'" name="'+number+'" onclick="openPhoto(this)" class="item close-panel" ><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i]+');background-repeat:no-repeat;background-size:100% 100%;height:200px;position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight: bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div><div class="col-50" style="padding:1px"><a href="#" id="'+mediaId[i+1]+'" name="'+nextNumber+'" onclick="openPhoto(this)" class="item close-panel"><div style="background-image: linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+link[i+1]+');background-repeat:no-repeat;background-size:100% 100%;height:200px; position:relative;" class="lazy"><span style="color:#FFFFFF;position:absolute;bottom:0;padding-bottom:10px;font-size:18px;font-weight:bold;margin-left: auto;margin-right:auto;left:0;right:0;"><center></center></span></div></a></div></div></div>');
 							i++;
 							
 							 if(mediaId[i] === undefined)
@@ -252,7 +252,7 @@ function getAllphotos(item)
 						var show = document.getElementById('photoOutput');
 						show.style.visibility = 'visible';		
 						
-						localStorage["caption"] = JSON.stringify(caption);
+						localStorage["coverLink"] = JSON.stringify(coverLink);
 						localStorage["link"] = JSON.stringify(link);
 						localStorage["albumTitle"] = JSON.stringify(albumTitle[0]);
 					}

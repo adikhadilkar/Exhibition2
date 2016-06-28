@@ -13,7 +13,7 @@
 	<div class="list-block inputs-list">
         <ul>
 			
-					<li>
+					<li id="moList" style="display:block">
 						<div class="item-content">
 						<div class="item-media"><i class="icon icon-form-tel"></i></div>
 						<div class="item-inner">
@@ -26,7 +26,7 @@
 						</div>
 					</li>
 					
-					<li>
+					<li id="buList" style="display:block">
 						<div class="content-block"><a href="#" class="button button-fill button-raised color-blue" onclick="generateOtp()"> Click To Receive OTP</a>
 	  
 	
@@ -36,7 +36,7 @@
 						</div>
 					</li>
 					
-					<li>
+					<li id="otpList" style="display:none">
 					<div class="item-content">
 						<div class="item-media"><i class="icon icon-form-comment"></i></div>
 						<div class="item-inner">
@@ -49,7 +49,7 @@
 					</div>
 					</li>
 					
-					<li>
+					<li id="newPassList" style="display:none">
 						<div class="item-content">
 						<div class="item-media"><i class="icon icon-form-password"></i></div>
 						<div class="item-inner">
@@ -62,7 +62,7 @@
 						</div>
 					</li>
 					
-					<li>
+					<li id="conPassList" style="display:none">
 						<div class="item-content">
 						<div class="item-media"><i class="icon icon-form-password"></i></div>
 						<div class="item-inner">
@@ -78,13 +78,15 @@
         </ul>
       </div>
 
-	<div class="content-block"><a href="#" class="button button-fill button-raised color-red" onclick="forgotpass()"> Change Password </a>
+	<div class="content-block" id="bu2List" style="display:none"><a href="#" class="button button-fill button-raised color-red" onclick="forgotpass()"> Change Password </a>
 	  
 	
 		<a href="#" id="cPasswordNext"></a>
 
 
 	</div>
+	<center><div class="label" id="finalError" name = "finalError" style="color:#ff0000"></div></center>
+	  <center><a href="#" id="resend" onclick="resend()" style="display:none">Resend OTP ?</a></center>
   
  
 

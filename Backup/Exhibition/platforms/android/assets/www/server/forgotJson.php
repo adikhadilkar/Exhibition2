@@ -20,24 +20,24 @@ $jsonresponse =	"";
 @$newPassword=$data['password'][0]['newPassword'];
 @$confirmPassword=$data['password'][0]['confirmPassword'];
 
-if($pOtp!=$nOtp)
-{
-	deliver_response(202,"Otp Does Not Match!","otp",$jsonresponse);
-}	
-else if($newPassword!=$confirmPassword)
-{
-	deliver_response(203,"Passwords Does Not Match!","otp",$jsonresponse);
-}
-else
-{
-	$updateVisitorQuery="update visitor
-	set password='$newPassword'	
-	where mobileNo='$mobileNo'";	
-	mysql_query($updateVisitorQuery,$conn); 
-	
-	$jsonresponse=$mobileNo;			
-	deliver_response(200,"visitor profile updated","visitor",$jsonresponse);
-}	
 
+		if($pOtp!=$nOtp)
+		{
+			deliver_response(202,"Otp Does Not Match!","otp",$jsonresponse);
+		}	
+		else if($newPassword!=$confirmPassword)
+		{
+			deliver_response(203,"Passwords Does Not Match!","otp",$jsonresponse);
+		}
+		else
+		{
+			$updateVisitorQuery="update visitor
+			set password='$newPassword'	
+			where mobileNo='$mobileNo'";	
+			mysql_query($updateVisitorQuery,$conn); 
+	
+			$jsonresponse=$mobileNo;			
+			deliver_response(200,"visitor profile updated","visitor",$jsonresponse);
+		}	
 
 ?>
